@@ -14,3 +14,22 @@ data QuoteData = QuoteData {
   , high :: Double
   , low :: Double
   }
+  deriving (Generic, FromNamedRecord, Show)
+
+instance FromField Day where
+  parseField = parseTimeM True defaultTimeLocale "%Y-%m-%d" . unpack
+
+data QField
+  = Open
+  | Close
+  | High
+  | Low
+  | Volume
+  deriving (Eq, Ord, Show, Enum, Bounded)
+
+field2fun :: QField -> QuoteData -> Double
+field2fun Open = open
+field2fun Close = close
+field2fun High = high
+field2fun Low = low
+field2fun Volume = fromIntegral . volume
