@@ -27,6 +27,7 @@ library
   exposed-modules:
       Charts
       Lib
+      MyChart
       QuoteData
   other-modules:
       Paths_stocks
